@@ -30,7 +30,7 @@ export async function getBuddyMessage(
     return 'Connect your Gemini API key to unlock AI features!';
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model:  "gemini-2.5-flash" });
 
   const context = riskiestTask
     ? `Risky task: "${riskiestTask.title}" (Deadline: ${riskiestTask.deadline.toLocaleString()}, Risk: ${riskiestTask.riskScore}%). ${activeTasks.length} total active tasks.`
@@ -57,7 +57,7 @@ export async function generateRescueSteps(task: Task, personality: BuddyPersonal
     return generateFallbackRescueSteps(task);
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model:  "gemini-2.5-flash"});
 
   const prompt = `${getPersonalityPrompt(personality)}
 
@@ -180,7 +180,7 @@ export async function analyzeProcrastinationPattern(
     return 'You tend to postpone tasks when they feel overwhelming. Try breaking them into smaller steps!';
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model:  "gemini-2.5-flash" });
 
   const prompt = `${getPersonalityPrompt(personality)}
 
@@ -213,7 +213,7 @@ export async function generateFutureComparison(
     };
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model:  "gemini-2.5-flash" });
 
   const prompt = `${getPersonalityPrompt(personality)}
 
@@ -258,7 +258,7 @@ export async function getEnergyBasedTaskRecommendation(
     return `Focus on: "${sorted[0].title}" - it has the highest risk score at ${sorted[0].riskScore}%.`;
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model:  "gemini-2.5-flash" });
 
   const tasksContext = tasks
     .slice(0, 8)
@@ -300,7 +300,7 @@ export async function generateAccountabilityScript(
     return `This is your productivity buddy calling about "${task.title}". It's critical - let's get it done now!`;
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model:  "gemini-2.5-flash" });
 
   const hoursLeft = Math.max(0, Math.round((task.deadline.getTime() - Date.now()) / (1000 * 60 * 60)));
 
@@ -332,7 +332,7 @@ export async function generateRoast(
     return 'Procrastination is an art form, but you are taking it to the next level!';
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model:  "gemini-2.5-flash" });
 
   const tasksContext = tasks
     .slice(0, 5)

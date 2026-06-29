@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useTheme, type ThemeMode } from '../contexts/ThemeContext';
+
 import { updateUserPersonality, updateUserEnergy } from '../services/firestore';
 import type { BuddyPersonality, EnergyLevel } from '../types';
 import { Card, CardBody, CardHeader } from '../components/ui/Card';
@@ -14,10 +14,6 @@ import {
   Swords,
   Battery,
   Coffee,
-  Sun,
-  Moon,
-  Gamepad2,
-  Palette,
 } from 'lucide-react';
 import { cn } from '../utils/helpers';
 
@@ -75,15 +71,10 @@ const ENERGY_LEVELS: { id: EnergyLevel; name: string; icon: React.ElementType; d
   },
 ];
 
-const THEMES: { id: ThemeMode; name: string; icon: React.ElementType; description: string }[] = [
-  { id: 'light', name: 'Light', icon: Sun, description: 'Clean and minimal' },
-  { id: 'dark', name: 'Dark', icon: Moon, description: 'Deep navy, default' },
-  { id: 'gaming', name: 'Gaming', icon: Gamepad2, description: 'Cyber RPG aesthetic' },
-];
+
 
 export function SettingsPage() {
   const { userProfile, firebaseUser, refreshUserProfile } = useAuth();
-  const { theme, setTheme } = useTheme();
   const [selectedPersonality, setSelectedPersonality] = useState<BuddyPersonality>('supportive-friend');
   const [selectedEnergy, setSelectedEnergy] = useState<EnergyLevel>('normal');
   const [saving, setSaving] = useState(false);
@@ -131,46 +122,7 @@ export function SettingsPage() {
         <p className="page-subtitle">Customize your NeverLate experience</p>
       </header>
 
-      {/* Appearance / Theme */}
-      <Card hoverable={false}>
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <div
-              className="p-2 rounded-xl"
-              style={{ background: 'var(--stat-icon-bg)' }}
-            >
-              <Palette className="w-4 h-4 text-theme-accent" />
-            </div>
-            <h2 className="section-title">Appearance</h2>
-          </div>
-        </CardHeader>
-        <CardBody>
-          <p className="text-sm text-theme-secondary mb-5">
-            Choose a visual theme for your dashboard
-          </p>
-          <div className="grid grid-cols-3 gap-4">
-            {THEMES.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setTheme(t.id)}
-                className={cn(
-                  'theme-option',
-                  theme === t.id && 'theme-option--active'
-                )}
-              >
-                <div className={cn('theme-preview', `theme-preview--${t.id}`)} />
-                <t.icon className={cn('w-4 h-4', theme === t.id ? 'text-theme-accent' : 'text-theme-muted')} />
-                <span className={cn('text-sm font-medium', theme === t.id ? 'text-theme-accent' : 'text-theme-primary')}>
-                  {t.name}
-                </span>
-                <span className="text-[10px] text-theme-muted leading-tight">{t.description}</span>
-              </button>
-            ))}
-          </div>
-        </CardBody>
-      </Card>
-
+      
       {/* Profile section */}
       <Card hoverable={false}>
         <CardHeader>
